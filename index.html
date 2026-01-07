@@ -2,192 +2,175 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>找廁所MVP | 生理需求的最後一道防線</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>找廁所MVP | 城市生存的終極方案</title>
+    <meta name="description" content="全台最速找廁所方案，生理需求不該是場冒險。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #030712; color: #f9fafb; }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Inter:wght@900&display=swap');
         
-        .hero-gradient {
-            background: radial-gradient(circle at 50% -20%, #1e40af 0%, #030712 60%);
+        :root {
+            --brand-blue: #3b82f6;
+            --brand-green: #06C755;
         }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .line-green { background: #06C755; transition: 0.3s; }
-        .line-green:hover { background: #05b34c; box-shadow: 0 0 20px rgba(6, 199, 85, 0.5); }
-        .text-gradient { background: linear-gradient(to right, #3b82f6, #06b6d4, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* 漂浮動畫 */
-        .float { animation: floating 3s ease-in-out infinite; }
-        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        body { 
+            font-family: 'Noto Sans TC', sans-serif; 
+            background-color: #020617; 
+            color: #f8fafc; 
+            -webkit-font-smoothing: antialiased; 
+        }
+
+        .hero-gradient { 
+            background: radial-gradient(circle at 50% -20%, #1e40af 0%, #020617 75%); 
+        }
+
+        .glass { 
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-gradient { 
+            background: linear-gradient(135deg, #60a5fa, #2dd4bf); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        /* 鈕扣優化 */
+        .btn-primary {
+            background: linear-gradient(135deg, #06C755, #05a346);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-primary:active { transform: scale(0.96); }
+
+        /* 卡片優化 */
+        .stat-card {
+            transition: all 0.4s ease;
+        }
+        .stat-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .mono-font { font-family: 'Inter', sans-serif; }
     </style>
 </head>
 <body class="overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="bg-blue-600 text-white p-2 rounded-lg"><i class="fas fa-restroom"></i></div>
-                <span class="text-xl font-black tracking-tighter">找廁所<span class="text-blue-500 font-normal underline">MVP</span></span>
+    <nav class="fixed w-full z-50 px-4 py-4 md:px-8">
+        <div class="max-w-6xl mx-auto glass rounded-3xl px-5 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg shadow-blue-900/20">
+                    <i class="fas fa-restroom text-sm"></i>
+                </div>
+                <span class="text-xl font-black tracking-tighter">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
             </div>
-            <a href="https://line.me/R/ti/p/@439avyvf" class="line-green text-white px-6 py-2 rounded-full font-bold text-sm">立即加入</a>
+            <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-5 py-2 rounded-2xl font-bold text-sm shadow-lg shadow-green-900/20">
+                立即加入
+            </a>
         </div>
     </nav>
 
-    <section class="hero-gradient min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center">
-        <div data-aos="fade-down">
-            <span class="inline-block border border-blue-500/50 text-blue-400 px-4 py-1 rounded-full text-xs font-bold mb-6 tracking-widest uppercase bg-blue-500/10">城市求生必備工具</span>
-            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight">
-                生理需求，<br><span class="text-gradient">不該是場冒險。</span>
+    <main class="hero-gradient min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <span class="inline-block border border-blue-500/30 text-blue-400 px-4 py-1 rounded-full text-[10px] md:text-xs font-black mb-8 tracking-[0.2em] uppercase bg-blue-500/5">
+                URBAN SURVIVAL SOLUTION
+            </span>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.15] md:leading-[1.1] tracking-tight">
+                生理需求<br><span class="text-gradient">不該是場冒險。</span>
             </h1>
-            <p class="text-gray-400 text-lg md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 **MVP**。兩鍵導航，瞬息抵達，我們為你掃除所有尷尬。
+            <p class="text-gray-400 text-base md:text-xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 <span class="text-white font-bold tracking-widest">MVP</span>。<br class="hidden md:block">兩鍵導航，瞬息抵達。
             </p>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-6 mb-20" data-aos="fade-up" data-aos-delay="200">
-            <button onclick="launchConfetti()" class="line-green text-white w-72 py-5 rounded-2xl font-black text-xl flex items-center justify-center group">
-                <i class="fab fa-line text-3xl mr-3 group-hover:rotate-12 transition"></i> 召喚 MVP 機器人
+        <div class="flex flex-col sm:flex-row gap-5 w-full max-w-sm sm:max-w-none justify-center mb-24" data-aos="fade-up" data-aos-delay="200">
+            <button onclick="launchConfetti()" class="btn-primary text-white w-full sm:w-72 py-5 rounded-[2rem] font-black text-xl flex items-center justify-center shadow-xl">
+                <i class="fab fa-line text-3xl mr-3"></i> 召喚 MVP 機器人
             </button>
-            <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="glass text-white w-72 py-5 rounded-2xl font-black text-xl flex items-center justify-center hover:bg-white/10 transition">
+            <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="glass text-white w-full sm:w-72 py-5 rounded-[2rem] font-black text-xl flex items-center justify-center transition-all hover:bg-white/5">
                 <i class="fab fa-instagram text-3xl mr-3"></i> 追蹤社群情報
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl" data-aos="fade-up" data-aos-delay="400">
-            <div class="glass p-8 rounded-[2rem] relative overflow-hidden group">
-                <div class="absolute -right-4 -top-4 text-blue-500/10 text-8xl group-hover:scale-110 transition"><i class="fas fa-users"></i></div>
-                <div class="relative z-10">
-                    <p class="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">LINE 好友連動中</p>
-                    <h3 id="follower-count" class="text-5xl font-black text-white">載入中...</h3>
-                    <p class="text-blue-500 text-xs mt-2 font-bold flex items-center justify-center">
-                        <span class="w-2 h-2 bg-blue-500 rounded-full animate-ping mr-2"></span> 實時數據更新
-                    </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl" data-aos="fade-up" data-aos-delay="400">
+            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">LINE 好友連動</p>
+                <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
+                <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping mr-2"></span>
+                    <span class="text-[10px] text-blue-400 font-bold uppercase">Safe Syncing</span>
                 </div>
             </div>
-            <div class="glass p-8 rounded-[2rem] group">
-                <p class="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">全台公廁數據庫</p>
-                <h3 class="text-5xl font-black text-white">45,000+</h3>
-                <p class="text-gray-500 text-xs mt-2 uppercase font-bold tracking-tighter">每日自動更新點位</p>
-            </div>
-            <div class="glass p-8 rounded-[2rem] group">
-                <p class="text-gray-400 text-xs font-bold mb-2 tracking-widest uppercase">平均響應速度</p>
-                <h3 class="text-5xl font-black text-cyan-400">0.8s</h3>
-                <p class="text-gray-500 text-xs mt-2 uppercase font-bold tracking-tighter">領先全台的效能</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-20 items-center">
-                <div data-aos="fade-right">
-                    <h2 class="text-4xl md:text-5xl font-black mb-8 leading-snug">
-                        為什麼在 2026 年，<br>你依然需要 <span class="text-blue-500">找廁所MVP</span>?
-                    </h2>
-                    <div class="space-y-8">
-                        <div class="flex items-start">
-                            <div class="bg-blue-600/20 text-blue-500 p-3 rounded-xl mr-4"><i class="fas fa-bolt text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">瞬息解法，零下載壓力</h4>
-                                <p class="text-gray-400">不需額外下載 App，不需註冊帳號。內急時你不需要手忙腳亂，只需傳送位置，MVP 就會處理剩下的事。</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-emerald-600/20 text-emerald-500 p-3 rounded-xl mr-4"><i class="fas fa-map-marked-alt text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">精確度過濾系統</h4>
-                                <p class="text-gray-400">Google Maps 經常帶你去倒閉的店家？我們只抓取政府認證、加油站、捷運與大型公共設施，確保你到達時門是開著的。</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-purple-600/20 text-purple-500 p-3 rounded-xl mr-4"><i class="fas fa-heart text-xl"></i></div>
-                            <div>
-                                <h4 class="font-bold text-xl mb-1">完全免費，永久承諾</h4>
-                                <p class="text-gray-400">這是一個由熱愛解決問題的小組開發的專案。我們承諾基本找廁所功能將永遠免費提供給每位用戶。</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">全台公廁數據庫</p>
+                <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
+                <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full">
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Database Updating</span>
                 </div>
-                <div class="relative" data-aos="fade-left">
-                    <div class="glass aspect-square rounded-[4rem] flex items-center justify-center overflow-hidden float">
-                        <i class="fas fa-restroom text-[12rem] text-blue-600/20"></i>
-                    </div>
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/30 rounded-full blur-[80px]"></div>
+            </div>
+            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">平均響應速度</p>
+                <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
+                <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full">
+                    <span class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Optimizing Node</span>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <section class="py-24 bg-blue-600 text-center px-6 rounded-t-[5rem]">
-        <div class="max-w-4xl mx-auto" data-aos="zoom-in">
-            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 italic">誰，才能成為真正的 MVP?</h2>
-            <p class="text-blue-100 text-xl mb-12 font-medium">
-                是這款強大的機器人？還是那個在關鍵時刻，冷靜打開 LINE 分享位置，成功挽救尷尬場面的你？
+    <section class="py-24 bg-blue-600 text-center px-6 rounded-t-[4rem] md:rounded-t-[6rem] shadow-[0_-20px_80px_rgba(37,99,235,0.25)] relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tighter uppercase">究竟誰能成為真正的 MVP</h2>
+            <p class="text-blue-100 text-lg md:text-xl mb-12 font-medium leading-relaxed">
+                是這款強大的機器人？還是那個在關鍵時刻冷靜打開 LINE 分享位置成功挽救尷尬場面的你？
             </p>
-            <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-6 rounded-full text-2xl font-black shadow-2xl hover:scale-110 transition inline-block">
-                立即領取你的 MVP 勳章
+            <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-5 rounded-[2rem] text-xl font-black shadow-2xl hover:scale-105 transition-all inline-block active:scale-95">
+                立即領取 MVP 勳章
             </a>
         </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-black text-white/5 select-none pointer-events-none">MVP</div>
     </section>
 
-    <footer class="bg-gray-950 py-20 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-10 md:mb-0 text-center md:text-left">
-                <h4 class="text-2xl font-black mb-4">找廁所<span class="text-blue-500">MVP</span></h4>
-                <p class="text-gray-500 text-sm max-w-xs leading-relaxed">
-                    本服務專注於提升城市生活品質。透過數據與自動化，我們讓找廁所這件小事，變得優雅且專業。
-                </p>
+    <footer class="bg-[#020617] py-16 px-6 border-t border-white/5 text-center">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-10">
+                <h4 class="text-2xl font-black mb-3">找廁所<span class="text-blue-500">MVP</span></h4>
+                <p class="text-gray-500 text-xs max-w-xs mx-auto">致力於透過數位技術，提升每一位市民在緊急時刻的生活品質。</p>
             </div>
-            <div class="flex space-x-8">
-                <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-600 hover:text-green-500 transition"><i class="fab fa-line"></i></a>
-                <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="text-3xl text-gray-600 hover:text-pink-500 transition"><i class="fab fa-instagram"></i></a>
+            <div class="flex justify-center space-x-8 mb-12">
+                <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-700 hover:text-[#06C755] transition-all transform hover:-translate-y-1"><i class="fab fa-line"></i></a>
+                <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="text-3xl text-gray-700 hover:text-[#E1306C] transition-all transform hover:-translate-y-1"><i class="fab fa-instagram"></i></a>
             </div>
-        </div>
-        <div class="text-center mt-16 text-xs text-gray-700 font-bold tracking-widest uppercase">
-            © 2026 TOILET MVP TEAM. ALL RIGHTS RESERVED.
+            <p class="text-[10px] text-gray-800 font-bold uppercase tracking-[0.4em]">© 2026 TOILET MVP TEAM. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
     <script>
         AOS.init({ duration: 1000, once: true });
-
-        // 模擬數據連動效果
-        function animateFollowers(target) {
-            let count = 0;
-            const element = document.getElementById('follower-count');
-            const interval = setInterval(() => {
-                count += Math.ceil(target / 40);
-                if (count >= target) {
-                    element.innerText = target.toLocaleString();
-                    clearInterval(interval);
-                } else {
-                    element.innerText = count.toLocaleString();
-                }
-            }, 30);
-        }
-
-        // 初始化設定人數（在這裡填寫你目前的人數）
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                animateFollowers(1582); // 你可以隨時進來改這個數字
-            }, 1000);
-        });
-
+        
         function launchConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#06C755', '#3b82f6', '#ffffff']
-            });
-            setTimeout(() => {
-                window.location.href = "https://line.me/R/ti/p/@439avyvf";
-            }, 1000);
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                const particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+
+            setTimeout(() => { window.location.href = "https://line.me/R/ti/p/@439avyvf"; }, 1500);
         }
     </script>
 </body>
