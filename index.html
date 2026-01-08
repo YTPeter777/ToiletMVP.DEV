@@ -22,23 +22,21 @@
         .stat-card { transition: all 0.4s ease; }
         .stat-card:hover { border-color: rgba(59, 130, 246, 0.3); background: rgba(255, 255, 255, 0.04); }
 
-        /* --- 核心優化：智慧控制容器 (解決重疊與字體縮放問題) --- */
+        /* 右下角控制項容器 - 解決字體縮放重疊問題 */
         .fixed-controls {
             position: fixed;
             bottom: 24px;
             right: 20px;
             z-index: 100;
             display: flex;
-            flex-direction: column; /* 垂直排列 */
-            align-items: flex-end; /* 右對齊 */
-            gap: 12px; /* 固定安全距離 */
-            max-width: 160px; /* 防止過度寬展 */
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
         }
 
-        /* 返回頂部按鈕 */
         #backToTopBtn {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -47,15 +45,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease;
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
         }
         #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        #backToTopBtn:hover { background: rgba(59, 130, 246, 0.5); border-color: #3b82f6; transform: translateY(-3px); }
 
-        /* 智慧氣象標籤 */
         .smart-tag { 
             padding: 6px 14px;
             border-radius: 12px;
@@ -66,7 +62,7 @@
             gap: 10px;
             pointer-events: none;
             backdrop-filter: blur(10px);
-            white-space: nowrap; /* 禁止字體大時自動換行 */
+            white-space: nowrap;
         }
         .mono-font { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: bold; }
     </style>
@@ -77,7 +73,6 @@
         <div id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <i class="fas fa-chevron-up text-sm"></i>
         </div>
-
         <div class="smart-tag">
             <div id="liveTime" class="mono-font text-white">00:00</div>
             <div class="w-[1px] h-3 bg-white/20"></div>
@@ -94,7 +89,7 @@
                 <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg">
                     <i class="fas fa-restroom text-sm"></i>
                 </div>
-                <span class="text-xl font-black tracking-tighter text-white">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
+                <span class="text-xl font-black tracking-tighter">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
             </div>
             <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-5 py-2 rounded-2xl font-bold text-sm shadow-lg">立即加入</a>
         </div>
@@ -148,7 +143,7 @@
         <div class="text-center mb-20" data-aos="fade-up">
             <h2 class="text-3xl md:text-5xl font-black mb-6">為什麼你需要 <span class="text-blue-500 font-bold">MVP</span></h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-                我們深知內急時的焦慮，因此不只提供地點，更透過數據篩選。
+                我們深知內急時的焦慮，因此不只提供地點，更透過數據篩選，為您在城市的轉角準備好最優雅、最快速的解決方案。
             </p>
         </div>
 
@@ -156,31 +151,67 @@
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-motorcycle"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">外送與運將的後盾</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">精準過濾周邊具備便利性的公廁點位。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">針對需要快速停車、暫時休憩的職業需求，MVP 精準過濾周邊具備便利性的公廁點位。讓您在跑單空檔不再為尋找廁所而空轉，保持最佳工作狀態。</p>
             </div>
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-map-marked-alt"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">旅人與觀光客</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">透過即時地理定位與兩鍵導航，直接抵達洗手間。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">在陌生的城市或熱門景點中不再繞路。透過即時地理定位與兩鍵導航，直接抵達最近的高評價洗手間。我們讓您的旅行回憶只留下美景，而非尋找廁所的狼狽身影。</p>
             </div>
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-child"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">家長們的急救星</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">優先標示具備親子友善設施的點位。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">當小孩突然內急，每一秒都是關鍵。我們在 10 秒內為您給出最優路線，並優先標示具備親子友善設施的點位，讓尷尬場面煙消雲散，守護全家人的出行尊嚴。</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up">
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-cyan-500/30 transition-all group flex flex-col md:flex-row items-start gap-6">
+                <div class="w-16 h-16 shrink-0 bg-cyan-500/10 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition text-cyan-400 text-3xl"><i class="fas fa-shield-alt"></i></div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-white">衛生與安全篩選</h4>
+                    <p class="text-gray-400 leading-relaxed text-sm">MVP 結合大數據評價與官方資訊，優先推薦照明充足、環境整潔的公廁。對於深夜或獨自外出的使用者，我們提供更具安全感的導引策略，讓每一次使用都安心無慮。</p>
+                </div>
+            </div>
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-purple-500/30 transition-all group flex flex-col md:flex-row items-start gap-6">
+                <div class="w-16 h-16 shrink-0 bg-purple-500/10 rounded-2xl flex items-center justify-center group-hover:rotate-12 transition text-purple-400 text-3xl"><i class="fas fa-wheelchair"></i></div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4 text-white">無障礙友善環境</h4>
+                    <p class="text-gray-400 leading-relaxed text-sm">我們持續優化資料庫，針對身障人士、高齡長輩或行動不便者，提供精確的無障礙廁所資訊。MVP 相信，基本的生理需求滿足權利，應該屬於每一個平等的人。</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <section class="py-24 bg-blue-600 text-center px-6 rounded-t-[4rem] md:rounded-t-[6rem] shadow-2xl relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tighter uppercase">究竟誰能成為真正的 MVP</h2>
+            <p class="text-blue-100 text-lg md:text-xl mb-12 font-medium leading-relaxed">是這款強大的機器人？還是那個在關鍵時刻冷靜打開 LINE 分享位置成功挽救尷尬場面的你？</p>
+            <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-5 rounded-[2rem] text-xl font-black shadow-2xl hover:scale-105 transition-all inline-block active:scale-95">立即領取 MVP 勳章</a>
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-black text-white/5 select-none pointer-events-none">MVP</div>
+    </section>
+
+    <footer class="bg-[#020617] py-16 px-6 border-t border-white/5 text-center">
+        <div class="max-w-6xl mx-auto text-center">
+            <h4 class="text-2xl font-black mb-3">找廁所<span class="text-blue-500 font-bold">MVP</span></h4>
+            <p class="text-gray-500 text-xs max-w-xs mx-auto mb-10 leading-relaxed">致力於透過數位技術，提升每一位市民在緊急時刻的生活品質。</p>
+            <div class="flex justify-center space-x-8 mb-12">
+                <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-700 hover:text-[#06C755] transition-all"><i class="fab fa-line"></i></a>
+                <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="text-3xl text-gray-700 hover:text-[#E1306C] transition-all"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-[10px] text-gray-800 font-bold uppercase tracking-[0.4em]">© 2026 TOILET MVP TEAM. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        // 智慧時間偵測 (HH:mm)
         function updateSmartTag() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             document.getElementById('liveTime').innerText = `${hours}:${minutes}`;
-            
             const hour = now.getHours();
             const emojiEl = document.getElementById('weatherEmoji');
             if (hour >= 18 || hour < 6) { emojiEl.innerText = "🌙"; } else { emojiEl.innerText = "☀️"; }
@@ -188,17 +219,15 @@
         setInterval(updateSmartTag, 1000);
         updateSmartTag();
 
-        // 捲動顯示返回案件
         window.onscroll = function() {
             const topBtn = document.getElementById("backToTopBtn");
-            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
                 topBtn.classList.add("show");
             } else {
                 topBtn.classList.remove("show");
             }
         };
 
-        // 氣溫獲取
         async function getRealTemp() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(async (pos) => {
@@ -212,7 +241,6 @@
         }
         getRealTemp();
 
-        // Confetti 煙火效果
         function launchConfetti() {
             const duration = 2.5 * 1000;
             const animationEnd = Date.now() + duration;
