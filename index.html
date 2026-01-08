@@ -11,9 +11,9 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Inter:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Inter:wght@900&family=JetBrains+Mono:wght@500&display=swap');
         
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #020617; color: #f8fafc; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #020617; color: #f8fafc; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
         .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e40af 0%, #020617 75%); }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .text-gradient { background: linear-gradient(135deg, #60a5fa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -21,9 +21,43 @@
         .btn-primary:active { transform: scale(0.96); }
         .stat-card { transition: all 0.4s ease; }
         .stat-card:hover { border-color: rgba(59, 130, 246, 0.3); background: rgba(255, 255, 255, 0.04); }
+
+        /* 新增：智慧數據標籤樣式 */
+        .smart-tag { 
+            position: fixed; bottom: 20px; right: 20px; z-index: 100; 
+            padding: 6px 14px; border-radius: 12px; background: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 10px; 
+            pointer-events: none; backdrop-filter: blur(10px); 
+        }
+        .mono-font { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: bold; }
+
+        /* 新增：返回頂部按鈕樣式 */
+        #backToTopBtn {
+            position: fixed; bottom: 20px; right: 155px; z-index: 101;
+            width: 40px; height: 40px; border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.4s ease; opacity: 0; visibility: hidden;
+            transform: translateY(10px);
+        }
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTopBtn:hover { background: rgba(59, 130, 246, 0.4); border-color: #3b82f6; transform: translateY(-3px); }
     </style>
 </head>
 <body class="overflow-x-hidden">
+
+    <div id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-chevron-up text-sm"></i>
+    </div>
+
+    <div class="smart-tag">
+        <div id="liveTime" class="mono-font text-white">00:00</div>
+        <div class="w-[1px] h-3 bg-white/20"></div>
+        <div class="flex items-center gap-1.5 text-blue-400">
+            <span id="weatherEmoji" style="font-size: 14px;">☀️</span>
+            <span id="realTemp" class="mono-font">--°C</span>
+        </div>
+    </div>
 
     <nav class="fixed w-full z-50 px-4 py-4">
         <div class="max-w-6xl mx-auto glass rounded-3xl px-5 py-3 flex justify-between items-center">
@@ -136,7 +170,7 @@
 
     <footer class="bg-[#020617] py-16 px-6 border-t border-white/5 text-center">
         <div class="max-w-6xl mx-auto text-center">
-            <h4 class="text-2xl font-black mb-3">找廁所<span class="text-blue-500 font-bold">MVP</span></h4>
+            <h4 class="text-2xl font-black mb-3 text-white">找廁所<span class="text-blue-500 font-bold">MVP</span></h4>
             <p class="text-gray-500 text-xs max-w-xs mx-auto mb-10 leading-relaxed">致力於透過數位技術，提升每一位市民在緊急時刻的生活品質。</p>
             <div class="flex justify-center space-x-8 mb-12">
                 <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-700 hover:text-[#06C755] transition-all"><i class="fab fa-line"></i></a>
@@ -149,6 +183,53 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
+        // 1. 智慧氣象與時間偵測 (無秒數)
+        function updateSmartTag() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('liveTime').innerText = `${hours}:${minutes}`;
+            
+            // 早晚圖示切換
+            const hour = now.getHours();
+            const emojiEl = document.getElementById('weatherEmoji');
+            if (hour >= 18 || hour < 6) {
+                emojiEl.innerText = "🌙"; 
+            } else {
+                emojiEl.innerText = "☀️";
+            }
+        }
+        setInterval(updateSmartTag, 1000);
+        updateSmartTag();
+
+        // 2. 返回頂部顯示偵測
+        window.onscroll = function() {
+            const topBtn = document.getElementById("backToTopBtn");
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                topBtn.classList.add("show");
+            } else {
+                topBtn.classList.remove("show");
+            }
+        };
+
+        // 3. 真實氣溫獲取
+        async function getRealTemp() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`);
+                        const data = await res.json();
+                        document.getElementById('realTemp').innerText = `${Math.round(data.current_weather.temperature)}°C`;
+                    } catch (e) {
+                        document.getElementById('realTemp').innerText = "--°C";
+                    }
+                }, () => {
+                    document.getElementById('realTemp').innerText = "--°C";
+                });
+            }
+        }
+        getRealTemp();
+
         function launchConfetti() {
             const duration = 2.5 * 1000;
             const animationEnd = Date.now() + duration;
