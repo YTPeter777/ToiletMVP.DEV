@@ -22,7 +22,7 @@
         .stat-card { transition: all 0.4s ease; }
         .stat-card:hover { border-color: rgba(59, 130, 246, 0.3); background: rgba(255, 255, 255, 0.04); }
 
-        /* 右下角控制項容器 - 解決字體縮放重疊問題 */
+        /* 右下角控制容器 */
         .fixed-controls {
             position: fixed;
             bottom: 24px;
@@ -89,9 +89,15 @@
                 <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg">
                     <i class="fas fa-restroom text-sm"></i>
                 </div>
-                <span class="text-xl font-black tracking-tighter">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
+                <span class="text-xl font-black tracking-tighter text-white">找廁所<span class="text-blue-500 ml-0.5 text-white">MVP</span></span>
             </div>
-            <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-5 py-2 rounded-2xl font-bold text-sm shadow-lg">立即加入</a>
+            
+            <div class="flex items-center space-x-4">
+                <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="text-white/70 hover:text-white transition-colors text-xl">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-5 py-2 rounded-2xl font-bold text-sm shadow-lg">立即加入</a>
+            </div>
         </div>
     </nav>
 
@@ -115,21 +121,21 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl" data-aos="fade-up" data-aos-delay="400">
             <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
-                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">LINE 好友連動</p>
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase text-white">LINE 好友連動</p>
                 <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
                 <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full text-blue-400">
                     <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-ping mr-2"></span>
                     <span class="text-[10px] font-bold uppercase">Safe Syncing</span>
                 </div>
             </div>
-            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
+            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center text-white">
                 <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">全台公廁數據庫</p>
                 <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
                 <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full text-gray-500">
                     <span class="text-[10px] font-bold uppercase tracking-widest">Database Updating</span>
                 </div>
             </div>
-            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center">
+            <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center text-white">
                 <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">平均響應速度</p>
                 <h3 class="text-2xl font-black text-gray-400 opacity-60">尚未同步</h3>
                 <div class="flex items-center mt-4 bg-white/5 px-4 py-1.5 rounded-full text-gray-500">
@@ -185,7 +191,7 @@
 
     <section class="py-24 bg-blue-600 text-center px-6 rounded-t-[4rem] md:rounded-t-[6rem] shadow-2xl relative overflow-hidden">
         <div class="max-w-4xl mx-auto relative z-10" data-aos="zoom-in">
-            <h2 class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tighter uppercase">究竟誰能成為真正的 MVP</h2>
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tighter uppercase text-white">究竟誰能成為真正的 MVP</h2>
             <p class="text-blue-100 text-lg md:text-xl mb-12 font-medium leading-relaxed">是這款強大的機器人？還是那個在關鍵時刻冷靜打開 LINE 分享位置成功挽救尷尬場面的你？</p>
             <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-5 rounded-[2rem] text-xl font-black shadow-2xl hover:scale-105 transition-all inline-block active:scale-95">立即領取 MVP 勳章</a>
         </div>
