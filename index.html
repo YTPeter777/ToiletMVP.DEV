@@ -34,34 +34,18 @@
         }
 
         #backToTopBtn {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            opacity: 0;
-            visibility: hidden;
+            width: 44px; height: 44px; border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.4s ease; opacity: 0; visibility: hidden;
             transform: translateY(10px);
         }
         #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
 
         .smart-tag { 
-            padding: 6px 14px;
-            border-radius: 12px;
-            background: rgba(15, 23, 42, 0.7); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            pointer-events: none;
-            backdrop-filter: blur(10px);
-            white-space: nowrap;
+            padding: 6px 14px; border-radius: 12px; background: rgba(15, 23, 42, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center;
+            gap: 10px; pointer-events: none; backdrop-filter: blur(10px); white-space: nowrap;
         }
         .mono-font { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: bold; }
     </style>
@@ -88,7 +72,7 @@
                 <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg">
                     <i class="fas fa-restroom text-sm"></i>
                 </div>
-                <span class="text-xl font-black tracking-tighter text-white">找廁所<span class="text-blue-500 ml-0.5 text-white">MVP</span></span>
+                <span class="text-xl font-black tracking-tighter text-white uppercase">Toilet<span class="text-blue-500 ml-0.5">MVP</span></span>
             </div>
             
             <div class="flex items-center space-x-4">
@@ -103,9 +87,9 @@
     <header class="hero-gradient min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center">
         <div data-aos="fade-up" data-aos-duration="1000">
             <span class="inline-block border border-blue-500/30 text-blue-400 px-4 py-1 rounded-full text-[10px] font-black mb-8 tracking-[0.2em] uppercase bg-blue-500/5">URBAN SURVIVAL SOLUTION</span>
-            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.15] md:leading-[1.1] tracking-tight text-white">生理需求<br><span class="text-gradient">不該是場冒險</span></h1>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1] text-white">生理需求<br><span class="text-gradient">不該是場冒險</span></h1>
             <p class="text-gray-400 text-base md:text-xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 <span class="text-white font-bold tracking-widest text-lg md:text-2xl ml-1">MVP</span>。<br class="hidden md:block">兩鍵導航，瞬息抵達。
+                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 <span class="text-white font-bold tracking-widest text-lg md:text-2xl ml-1">MVP</span>。<br>兩鍵導航，瞬息抵達。
             </p>
         </div>
 
@@ -118,42 +102,32 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl" data-aos="fade-up" data-aos-delay="400">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl mb-6" data-aos="fade-up" data-aos-delay="400">
             <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center text-white">
-                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">全台公廁數據庫</p>
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase text-white">全台公廁數據庫</p>
                 <h3 id="toiletCount" class="text-3xl font-black text-blue-400">0</h3>
-                <div class="flex items-center mt-4 bg-[#0f172a]/80 px-4 py-1.5 rounded-full border border-white/5">
-                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse mr-2"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-blue-400">Live Synchronized</span>
-                </div>
             </div>
             <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center text-white">
-                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">LINE 好友人數</p>
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase text-white">LINE 好友人數</p>
                 <h3 id="friendCount" class="text-3xl font-black text-cyan-400">0</h3>
-                <div class="flex items-center mt-4 bg-[#0f172a]/80 px-4 py-1.5 rounded-full border border-white/5">
-                    <span class="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-ping mr-2"></span>
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-cyan-400">Community Active</span>
-                </div>
             </div>
             <div class="glass stat-card p-8 rounded-[2.5rem] flex flex-col items-center text-white">
-                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">系統響應速度</p>
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase text-white">系統響應速度</p>
                 <h3 id="speedCount" class="text-3xl font-black text-purple-400">0</h3>
-                <div class="flex items-center mt-4 bg-[#1e1b4b]/50 px-5 py-1.5 rounded-full border border-purple-500/20">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-purple-400">Stable Connection</span>
-                </div>
             </div>
         </div>
+        <p class="text-gray-600 text-[10px] font-bold tracking-widest uppercase opacity-60" data-aos="fade-up" data-aos-delay="500">※ 此數據僅供參考用途</p>
     </header>
 
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <div class="text-center mb-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-black mb-6">為什麼你需要 <span class="text-blue-500 font-bold">MVP</span></h2>
+            <h2 class="text-3xl md:text-5xl font-black mb-6 text-white">究竟誰可以成為 <span class="text-blue-500 font-bold">MVP</span> 呢？</h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-                我們深知內急時的焦慮，因此不只提供地點，更透過數據篩選，為您在城市的轉角準備好最優雅、最快速的解決方案。
+                我們深知內急時的焦慮，不論您是哪種身分，MVP 都能在城市的轉角為您準備好最快速的解決方案。
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" data-aos="fade-up">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8" data-aos="fade-up">
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-motorcycle"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">外送與運將的後盾</h4>
@@ -162,12 +136,17 @@
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-map-marked-alt"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">旅人與觀光客</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">在陌生的城市或熱門景點中不再繞路。透過即時地理定位與兩鍵導航，直接抵達最近的高評價洗手間。我們讓您的旅行回憶只留下美景，而非尋找廁所的狼狽身影。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">在陌生的城市或熱門景點中不再繞路。透過即時地理定位與兩鍵導航，直接抵達最近的高評價洗手間。讓您的旅行回憶只留下美景，而非狼狽身影。</p>
+            </div>
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
+                <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-wheelchair"></i></div>
+                <h4 class="text-xl font-bold mb-4 text-white">身障與高齡友善</h4>
+                <p class="text-gray-400 leading-relaxed text-sm">專屬過濾具備無障礙空間、扶手設施及緊急求助鈕的點位。我們重視每一位行動不便者的權益，確保導航路徑與設施皆能提供最高等級的安全與尊嚴。</p>
             </div>
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-child"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">家長們的急救星</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">當小孩突然內急，每一秒都是關鍵。我們在 10 秒內為您給出最優路線，並優先標示具備親子友善設施的點位，讓尷尬場面煙消雲散，守護全家人的出行尊嚴。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">當小孩突然內急，每一秒都是關鍵。我們在 10 秒內為您給出最優路線，並優先標示具備親子友善設施的點位，守護全家人的出行尊嚴。</p>
             </div>
         </div>
     </section>
@@ -176,14 +155,14 @@
         <div class="max-w-4xl mx-auto relative z-10" data-aos="zoom-in">
             <h2 class="text-4xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tighter uppercase">究竟誰能成為真正的 MVP</h2>
             <p class="text-blue-100 text-lg md:text-xl mb-12 font-medium leading-relaxed">是這款強大的機器人？還是那個在關鍵時刻冷靜打開 LINE 分享位置成功挽救尷尬場面的你？</p>
-            <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-5 rounded-[2rem] text-xl font-black shadow-2xl hover:scale-105 transition-all inline-block active:scale-95">立即領取 MVP 勳章</a>
+            <a href="https://line.me/R/ti/p/@439avyvf" class="bg-white text-blue-600 px-12 py-5 rounded-[2rem] text-xl font-black shadow-2xl hover:scale-105 transition-all inline-block active:scale-95">立即加入 LINE 機器人</a>
         </div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-black text-white/5 select-none pointer-events-none">MVP</div>
     </section>
 
     <footer class="bg-[#020617] py-16 px-6 border-t border-white/5 text-center">
         <div class="max-w-6xl mx-auto text-center">
-            <h4 class="text-2xl font-black mb-3 text-white">找廁所<span class="text-blue-500 font-bold">MVP</span></h4>
+            <h4 class="text-2xl font-black mb-3 text-white uppercase">Toilet<span class="text-blue-500 ml-0.5 font-bold">MVP</span></h4>
             <p class="text-gray-500 text-xs max-w-xs mx-auto mb-10 leading-relaxed">致力於透過數位技術，提升每一位市民在緊急時刻的生活品質。</p>
             <div class="flex justify-center space-x-8 mb-12">
                 <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-700 hover:text-[#06C755] transition-all"><i class="fab fa-line"></i></a>
@@ -196,23 +175,11 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        // 時間更新邏輯
         function updateSmartTag() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('liveTime').innerText = `${hours}:${minutes}`;
+            document.getElementById('liveTime').innerText = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
         }
-        setInterval(updateSmartTag, 1000);
-        updateSmartTag();
-
-        // 氣象圖示邏輯 (含下雨判斷)
-        function getWeatherIcon(code, isNight) {
-            if (code >= 51 && code <= 67) return "🌧️"; // 下雨
-            if (code >= 95) return "⛈️";             // 雷雨
-            if (code >= 1 && code <= 3) return isNight ? "☁️" : "⛅"; // 多雲
-            return isNight ? "🌙" : "☀️";            // 晴朗
-        }
+        setInterval(updateSmartTag, 1000); updateSmartTag();
 
         async function getRealTemp() {
             if (navigator.geolocation) {
@@ -225,49 +192,40 @@
                         const isNight = new Date().getHours() >= 18 || new Date().getHours() < 6;
                         
                         document.getElementById('realTemp').innerText = `${temp}°C`;
-                        document.getElementById('weatherEmoji').innerText = getWeatherIcon(code, isNight);
+                        let emoji = isNight ? "🌙" : "☀️";
+                        if (code >= 51 && code <= 67) emoji = "🌧️";
+                        if (code >= 95) emoji = "⛈️";
+                        document.getElementById('weatherEmoji').innerText = emoji;
                     } catch (e) {}
                 });
             }
         }
 
-        // 滾動控制項
         window.onscroll = function() {
             const topBtn = document.getElementById("backToTopBtn");
             if (document.documentElement.scrollTop > 400) topBtn.classList.add("show");
             else topBtn.classList.remove("show");
         };
 
-        // 數字載入動畫
         function countUp(id, target, suffix = "", isSpeed = false) {
             const element = document.getElementById(id);
             let current = 0;
-            const duration = 2000; 
-            const stepTime = 20; 
-            const increment = target / (duration / stepTime);
-
             const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.innerText = (isSpeed ? "約 " : "") + target.toLocaleString() + suffix;
-                    clearInterval(timer);
-                } else {
-                    element.innerText = Math.floor(current).toLocaleString() + (isSpeed ? "s" : suffix);
-                }
-            }, stepTime);
+                current += target / 100;
+                if (current >= target) { element.innerText = (isSpeed ? "約 " : "") + target.toLocaleString() + suffix; clearInterval(timer); }
+                else { element.innerText = Math.floor(current).toLocaleString() + (isSpeed ? "s" : suffix); }
+            }, 20);
         }
 
-        // 初始化
         window.addEventListener('load', () => {
             getRealTemp();
             setTimeout(() => {
                 countUp("toiletCount", 50000, " +");
                 countUp("friendCount", 30000, " +"); 
-                countUp("speedCount", 10, "s", true);
+                countUp("speedCount", 30, "s+", true);
             }, 1200);
         });
 
-        // 煙火特效與轉跳
         function launchConfetti() {
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             setTimeout(() => { window.location.href = "https://line.me/R/ti/p/@439avyvf"; }, 1500);
