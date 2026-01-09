@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Inter:wght@900&family=JetBrains+Mono:wght@500&display=swap');
@@ -94,9 +93,9 @@
         </div>
 
         <div class="flex flex-col sm:flex-row gap-5 w-full max-w-sm sm:max-w-none justify-center mb-24" data-aos="fade-up" data-aos-delay="200">
-            <button onclick="launchConfetti()" class="btn-primary text-white w-full sm:w-72 py-5 rounded-[2rem] font-black text-xl flex items-center justify-center shadow-xl">
+            <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white w-full sm:w-72 py-5 rounded-[2rem] font-black text-xl flex items-center justify-center shadow-xl">
                 <i class="fab fa-line text-3xl mr-3"></i> 召喚 MVP 機器人
-            </button>
+            </a>
             <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="glass text-white w-full sm:w-72 py-5 rounded-[2rem] font-black text-xl flex items-center justify-center transition-all hover:bg-white/5">
                 <i class="fab fa-instagram text-3xl mr-3"></i> 追蹤社群情報
             </a>
@@ -146,7 +145,7 @@
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:border-blue-500/30 transition-all group">
                 <div class="w-14 h-14 bg-blue-600/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition text-blue-500 text-2xl"><i class="fas fa-child"></i></div>
                 <h4 class="text-xl font-bold mb-4 text-white">家長們的急救星</h4>
-                <p class="text-gray-400 leading-relaxed text-sm">當小孩突然內急，每一秒都是關鍵。我們在 10 秒內為您給出最優路線，並優先標示具備親子友善設施的點位，守護全家人的出行尊嚴。</p>
+                <p class="text-gray-400 leading-relaxed text-sm">當小孩突然內急，每一秒都是關鍵。我們在 10~15秒內為您給出最優路線，並優先標示具備親子友善設施的點位，守護全家人的出行尊嚴。</p>
             </div>
         </div>
     </section>
@@ -163,11 +162,9 @@
     <footer class="bg-[#020617] py-16 px-6 border-t border-white/5 text-center">
         <div class="max-w-6xl mx-auto text-center">
             <h4 class="text-2xl font-black mb-3 text-white">找廁所<span class="text-blue-500 ml-0.5 font-bold">MVP</span></h4>
-            
             <p class="text-gray-400 text-[11px] md:text-xs max-w-3xl mx-auto mb-10 leading-relaxed whitespace-nowrap overflow-hidden">
                 致力於透過數位技術，提升每一位市民在緊急時刻的生活品質。
             </p>
-
             <div class="flex justify-center space-x-8 mb-12">
                 <a href="https://line.me/R/ti/p/@439avyvf" class="text-3xl text-gray-700 hover:text-[#06C755] transition-all"><i class="fab fa-line"></i></a>
                 <a href="https://www.instagram.com/toiletmvp?igsh=MW9oamMxOGExOWQ3Yw==" target="_blank" class="text-3xl text-gray-700 hover:text-[#E1306C] transition-all"><i class="fab fa-instagram"></i></a>
@@ -194,7 +191,6 @@
                         const temp = Math.round(data.current_weather.temperature);
                         const code = data.current_weather.weathercode;
                         const isNight = new Date().getHours() >= 18 || new Date().getHours() < 6;
-                        
                         document.getElementById('realTemp').innerText = `${temp}°C`;
                         let emoji = isNight ? "🌙" : "☀️";
                         if (code >= 51 && code <= 67) emoji = "🌧️";
@@ -211,19 +207,18 @@
             else topBtn.classList.remove("show");
         };
 
-        function countUp(id, target, suffix = "", isSpeed = false) {
+        function countUp(id, target, suffix = "", isSpeed = false, speedRange = "") {
             const element = document.getElementById(id);
             let current = 0;
             const timer = setInterval(() => {
-                current += target / 100;
-                if (current >= target) { 
-                    element.innerText = (isSpeed ? "約 " : "") + target.toLocaleString() + suffix; 
+                current += 1;
+                if (current >= 100) { 
+                    element.innerText = isSpeed ? speedRange : target.toLocaleString() + suffix; 
                     clearInterval(timer); 
+                } else {
+                    element.innerText = Math.floor((current/100) * (isSpeed ? 15 : target)).toLocaleString() + (isSpeed ? "s" : suffix);
                 }
-                else { 
-                    element.innerText = Math.floor(current).toLocaleString() + (isSpeed ? "s" : suffix); 
-                }
-            }, 20);
+            }, 15);
         }
 
         window.addEventListener('load', () => {
@@ -231,14 +226,9 @@
             setTimeout(() => {
                 countUp("toiletCount", 50000, " +");
                 countUp("friendCount", 30000, " +"); 
-                countUp("speedCount", 30, "s+", true);
+                countUp("speedCount", 15, "", true, "10～15s"); 
             }, 1200);
         });
-
-        function launchConfetti() {
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            setTimeout(() => { window.location.href = "https://line.me/R/ti/p/@439avyvf"; }, 1500);
-        }
     </script>
 </body>
 </html>
