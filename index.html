@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #020617; color: #f8fafc; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
         .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e40af 0%, #020617 75%); }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .text-gradient { background: linear-gradient(135deg, #60a5fa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-primary { background: linear-gradient(135deg, #06C755, #05a346); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .iphone-frame { width: 280px; height: 570px; background: #000; border-radius: 50px; box-shadow: 0 0 0 10px #1e293b, 0 40px 100px -20px rgba(0,0,0,0.8); position: relative; margin: 0 auto; }
-        .dynamic-island { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 90px; height: 28px; background: #000; border-radius: 20px; z-index: 50; }
-        .iphone-screen { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: #fff; position: relative; }
+        .iphone-frame { width: 300px; height: 610px; background: #000; border-radius: 54px; box-shadow: 0 0 0 10px #1e293b, 0 40px 100px -20px rgba(0,0,0,0.8); position: relative; margin: 0 auto; }
+        .dynamic-island { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; background: #000; border-radius: 20px; z-index: 50; }
+        .iphone-screen { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #fff; position: relative; }
         .fixed-controls { position: fixed; bottom: 24px; right: 20px; z-index: 100; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
         #backToTopBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.4s; }
         #backToTopBtn.show { opacity: 1; visibility: visible; }
@@ -30,135 +30,136 @@
     <div class="fixed-controls">
         <div id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fa-solid fa-chevron-up"></i></div>
         <div class="px-4 py-2 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md flex items-center gap-3 shadow-2xl">
-            <span id="liveTime" class="font-mono text-white text-xs font-bold">00:00</span>
+            <span id="liveTime" class="font-mono text-white text-sm font-bold">00:00</span>
             <div class="w-[1px] h-3 bg-white/20"></div>
-            <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono text-blue-400 text-xs font-bold">--°C</span>
+            <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono text-blue-400 text-sm font-bold">--°C</span>
         </div>
     </div>
 
     <nav class="fixed w-full z-50 px-4 py-4">
-        <div class="max-w-6xl mx-auto glass rounded-[1.5rem] px-4 py-2 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="bg-blue-600 text-white w-7 h-7 flex items-center justify-center rounded-lg shadow-lg"><i class="fa-solid fa-restroom text-[10px]"></i></div>
-                <span class="text-base font-black tracking-tighter text-white">找廁所<span class="text-blue-500">MVP</span></span>
+        <div class="max-w-6xl mx-auto glass rounded-[2rem] px-5 py-2.5 flex justify-between items-center">
+            <div class="flex items-center space-x-2.5">
+                <div class="bg-blue-600 text-white w-8 h-8 flex items-center justify-center rounded-lg shadow-lg"><i class="fa-solid fa-restroom text-xs"></i></div>
+                <span class="text-lg font-black tracking-tighter text-white">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
             </div>
             <div class="flex items-center space-x-2">
-                <a href="https://www.instagram.com/toiletmvp" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white text-xs">
+                <a href="https://www.instagram.com/toiletmvp" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all text-sm">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-3 py-2 rounded-lg font-bold text-[10px] uppercase tracking-wider">
+                <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg whitespace-nowrap tracking-wide">
                     立即加入
                 </a>
             </div>
         </div>
     </nav>
 
-    <header class="hero-gradient pt-32 pb-20 px-6 text-center">
+    <header class="hero-gradient pt-40 pb-20 px-6 text-center">
         <div data-aos="fade-up">
-            <span class="inline-block border border-blue-500/30 text-blue-400 px-3 py-1 rounded-full text-[9px] font-black mb-6 tracking-[0.15em] bg-blue-500/5">URBAN SURVIVAL SOLUTION</span>
-            <h1 class="text-4xl md:text-7xl font-black mb-6 leading-tight text-white tracking-tight">生理需求<br><span class="text-gradient">不該是場冒險</span></h1>
-            <p class="text-gray-400 text-sm md:text-lg mb-10 max-w-lg mx-auto leading-relaxed px-4">
-                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 <span class="text-white font-bold decoration-blue-600 underline underline-offset-4">MVP</span>。
+            <span class="inline-block border border-blue-500/30 text-blue-400 px-4 py-1 rounded-full text-[10px] font-black mb-8 tracking-[0.2em] uppercase bg-blue-500/5">URBAN SURVIVAL SOLUTION</span>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1] text-white">生理需求<br><span class="text-gradient">不該是場冒險</span></h1>
+            <p class="text-gray-400 text-base md:text-xl mb-12 max-w-2xl mx-auto font-bold opacity-90">
+                當你在街頭感到急迫時，你需要的不只是地圖，而是一個 <span class="text-white font-bold decoration-blue-600 underline underline-offset-8">MVP</span>。
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-5xl mx-auto mb-4 px-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="glass p-6 rounded-[2rem]">
-                <p class="text-gray-500 text-[9px] font-black mb-2 tracking-widest uppercase">全台公廁數據庫</p>
-                <h3 id="toiletCount" class="text-2xl font-black text-blue-400">0</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl mx-auto mb-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="glass p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">全台公廁數據庫</p>
+                <h3 id="toiletCount" class="text-3xl font-black text-blue-400">0</h3>
             </div>
-            <div class="glass p-6 rounded-[2rem]">
-                <p class="text-gray-500 text-[9px] font-black mb-2 tracking-widest uppercase">LINE 好友人數</p>
-                <h3 id="friendCount" class="text-2xl font-black text-cyan-400">0</h3>
+            <div class="glass p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">LINE 好友人數</p>
+                <h3 id="friendCount" class="text-3xl font-black text-cyan-400">0</h3>
             </div>
-            <div class="glass p-6 rounded-[2rem]">
-                <p class="text-gray-500 text-[9px] font-black mb-2 tracking-widest uppercase">系統響應速度</p>
-                <h3 id="speedCount" class="text-2xl font-black text-purple-400">0</h3>
+            <div class="glass p-8 rounded-[2.5rem] flex flex-col items-center">
+                <p class="text-gray-500 text-xs font-black mb-3 tracking-widest uppercase">系統響應速度</p>
+                <h3 id="speedCount" class="text-3xl font-black text-purple-400">0</h3>
             </div>
         </div>
-        <p class="text-gray-600 text-[9px] font-medium tracking-widest opacity-60 mb-20 uppercase">※ 此數據僅供參考用途</p>
+        <p class="text-gray-600 text-[10px] font-bold tracking-widest uppercase opacity-60 mb-20">※ 此數據僅供參考用途</p>
 
-        <div class="mb-12" data-aos="fade-up">
-            <h2 class="text-2xl md:text-4xl font-black text-white tracking-tight">城市生存，一手掌握</h2>
-            <div class="w-12 h-1 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+        <div class="mb-16 px-4" data-aos="fade-up">
+            <h2 class="text-3xl md:text-6xl font-black text-white tracking-tighter leading-tight">城市生存，一手掌握</h2>
+            <div class="w-16 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <section class="max-w-6xl mx-auto text-left mb-32 px-4" data-aos="fade-up">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section class="max-w-6xl mx-auto text-left mb-40" data-aos="fade-up">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="flex justify-center">
-                    <div class="iphone-frame scale-90 sm:scale-100">
+                    <div class="iphone-frame">
                         <div class="dynamic-island"></div>
                         <div class="iphone-screen">
+                            <div class="absolute top-0 w-full h-12 bg-white/80 backdrop-blur-md z-10"></div>
                             <img src="https://cdn.discordapp.com/attachments/1261461967185379408/1461914773594837052/IMG_1562.png?ex=696c49bb&is=696af83b&hm=367748f4173d020241c93c9e6bbee35aacf34e6b5e520bc6d9e1be4c5f900a13&" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
-                <div class="space-y-6">
-                    <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight text-center lg:text-left">直覺操作，秒速出發</h2>
-                    <div class="space-y-6">
-                        <div class="flex gap-4 group">
-                            <div class="w-12 h-12 shrink-0 glass rounded-xl flex items-center justify-center text-blue-400 text-xl"><i class="fa-solid fa-location-dot"></i></div>
-                            <div><h4 class="text-white text-lg font-bold mb-1">附近廁所</h4><p class="text-gray-400 text-xs leading-relaxed">一鍵掃描。系統自動過濾周邊評分最高的潔淨空間。</p></div>
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tighter">直覺操作，秒速出發</h2>
+                    <div class="space-y-8 font-bold">
+                        <div class="flex gap-5 group">
+                            <div class="w-14 h-14 shrink-0 glass rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all"><i class="fa-solid fa-location-dot text-2xl"></i></div>
+                            <div><h4 class="text-white text-xl mb-1">附近廁所</h4><p class="text-gray-400 text-sm leading-relaxed">一鍵掃描。系統自動過濾周邊評分最高的潔淨空間。</p></div>
                         </div>
-                        <div class="flex gap-4 group">
-                            <div class="w-12 h-12 shrink-0 glass rounded-xl flex items-center justify-center text-cyan-400 text-xl"><i class="fa-solid fa-star"></i></div>
-                            <div><h4 class="text-white text-lg font-bold mb-1">我的最愛</h4><p class="text-gray-400 text-xs leading-relaxed">私人據點。收藏您的「御用廁所」，讓每次外出都充滿安心感。</p></div>
+                        <div class="flex gap-5 group">
+                            <div class="w-14 h-14 shrink-0 glass rounded-2xl flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all"><i class="fa-solid fa-star text-2xl"></i></div>
+                            <div><h4 class="text-white text-xl mb-1">我的最愛</h4><p class="text-gray-400 text-sm leading-relaxed">私人據點。收藏您的「御用廁所」，讓每次外出都充滿安心感。</p></div>
                         </div>
-                        <div class="flex gap-4 group">
-                            <div class="w-12 h-12 shrink-0 glass rounded-xl flex items-center justify-center text-purple-400 text-xl"><i class="fa-solid fa-language"></i></div>
-                            <div><h4 class="text-white text-lg font-bold mb-1">多國語系</h4><p class="text-gray-400 text-xs leading-relaxed">國際友善。提供完整英文介面，照顧在地國際旅客與友人。</p></div>
+                        <div class="flex gap-5 group">
+                            <div class="w-14 h-14 shrink-0 glass rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all"><i class="fa-solid fa-language text-2xl"></i></div>
+                            <div><h4 class="text-white text-xl mb-1">Switch Language</h4><p class="text-gray-400 text-sm leading-relaxed">國際友善。照顧每一位在地的國際旅客與友人。</p></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="mb-12" data-aos="fade-up">
-            <h2 class="text-2xl md:text-4xl font-black text-white tracking-tight px-6">為每一種需求，準備專屬方案</h2>
-            <div class="w-12 h-1 bg-blue-600 mx-auto mt-3 rounded-full"></div>
+        <div class="mb-16 px-6" data-aos="fade-up">
+            <h2 class="text-2xl md:text-5xl font-black text-white tracking-tighter leading-snug">為每一種需求<br class="md:hidden">準備專屬方案</h2>
+            <div class="w-16 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
         </div>
     </header>
 
-    <section class="pb-24 px-6 max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="glass p-8 rounded-[2rem] border border-white/5" data-aos="fade-up">
-                <div class="text-blue-500 text-2xl mb-3"><i class="fa-solid fa-motorcycle"></i></div>
-                <h4 class="text-lg font-black mb-2 text-white">外送與運將的後盾</h4>
-                <p class="text-gray-400 text-xs leading-relaxed">針對職業需求，精準過濾周邊具備便利停車與 24 小時開放的點位。</p>
+    <section class="pb-32 px-6 max-w-6xl mx-auto font-bold">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5" data-aos="fade-up">
+                <div class="text-blue-500 text-3xl mb-4"><i class="fa-solid fa-motorcycle"></i></div>
+                <h4 class="text-2xl font-black mb-3 text-white tracking-tight">成為外送與運將的後盾</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">針對職業需求，精準過濾周邊具備便利停車空間與 24 小時開放的公廁點位。</p>
             </div>
-            <div class="glass p-8 rounded-[2rem] border border-white/5" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-pink-500 text-2xl mb-3"><i class="fa-solid fa-wheelchair"></i></div>
-                <h4 class="text-lg font-black mb-2 text-white">守護身障與高齡友善</h4>
-                <p class="text-gray-400 text-xs leading-relaxed">專屬過濾具備無障礙空間與緊急求助設施，守護每一份尊嚴。</p>
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-pink-500 text-3xl mb-4"><i class="fa-solid fa-wheelchair"></i></div>
+                <h4 class="text-2xl font-black mb-3 text-white tracking-tight">守護身障與高齡友善</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">專屬過濾具備無障礙空間與緊急求助設施，讓尊嚴感伴隨每一次需求。</p>
             </div>
-            <div class="glass p-8 rounded-[2rem] border border-white/5" data-aos="fade-up">
-                <div class="text-yellow-500 text-2xl mb-3"><i class="fa-solid fa-suitcase-rolling"></i></div>
-                <h4 class="text-lg font-black mb-2 text-white">旅人與觀光解決方案</h4>
-                <p class="text-gray-400 text-xs leading-relaxed">透過多國語系與直覺導航，兩鍵帶你抵達最近的安心解決方案。</p>
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5" data-aos="fade-up">
+                <div class="text-yellow-500 text-3xl mb-4"><i class="fa-solid fa-suitcase-rolling"></i></div>
+                <h4 class="text-2xl font-black mb-3 text-white tracking-tight">旅人與觀光的終極方案</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">透過多國語系切換與直覺導覽，兩鍵帶你抵達最近的安心解決方案。</p>
             </div>
-            <div class="glass p-8 rounded-[2rem] border border-white/5" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-green-500 text-2xl mb-3"><i class="fa-solid fa-child-reaching"></i></div>
-                <h4 class="text-lg font-black mb-2 text-white">營造安心的親子空間</h4>
-                <p class="text-gray-400 text-xs leading-relaxed">快速尋找設有尿布台與親子共用設施，為家長提供片刻便利。</p>
+            <div class="glass p-10 rounded-[2.5rem] border border-white/5" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-green-500 text-3xl mb-4"><i class="fa-solid fa-child-reaching"></i></div>
+                <h4 class="text-2xl font-black mb-3 text-white tracking-tight">營造安心的親子空間</h4>
+                <p class="text-gray-400 text-sm leading-relaxed">快速尋找設有尿布台與親子共用設施的空間，為家長提供片刻便利。</p>
             </div>
         </div>
     </section>
 
-    <section class="py-24 px-6 text-center relative overflow-hidden">
-        <div class="max-w-2xl mx-auto relative z-10" data-aos="zoom-in">
-            <h2 class="text-3xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tighter">究竟誰能成為<br>真正的 <span class="text-blue-500">MVP</span> ？</h2>
-            <a href="https://line.me/R/ti/p/@439avyvf" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-black shadow-xl hover:scale-105 transition-all">
+    <section class="py-32 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-10 leading-tight tracking-tighter">究竟誰能成為<br>真正的 <span class="text-blue-500">MVP</span> ？</h2>
+            <a href="https://line.me/R/ti/p/@439avyvf" class="inline-block bg-white text-blue-600 px-14 py-6 rounded-full text-2xl font-black shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:scale-105 transition-all">
                 立即領取 MVP 勳章
             </a>
         </div>
     </section>
 
-    <footer class="pt-10 pb-10 px-6 border-t border-white/5 text-center">
-        <div class="flex justify-center space-x-6 mb-8 text-xl">
+    <footer class="bg-[#020617] pt-20 pb-10 px-6 border-t border-white/5 text-center font-bold">
+        <div class="flex justify-center space-x-8 mb-16 text-2xl">
             <a href="https://line.me/R/ti/p/@439avyvf" class="text-gray-600 hover:text-[#06C755] transition-colors"><i class="fa-brands fa-line"></i></a>
             <a href="https://www.instagram.com/toiletmvp" target="_blank" class="text-gray-600 hover:text-[#E1306C] transition-colors"><i class="fa-brands fa-instagram"></i></a>
         </div>
-        <p class="text-[9px] text-gray-700 font-bold tracking-[0.3em] uppercase">© 2026 找廁所MVP團隊</p>
+        <p class="text-[10px] text-gray-700 font-bold tracking-[0.5em] uppercase">© 2026 找廁所MVP團隊</p>
     </footer>
 
     <script>
