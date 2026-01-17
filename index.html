@@ -4,40 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>找廁所MVP | 城市生存的終極方案</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap');
+        
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #020617; color: #f8fafc; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
         .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e40af 0%, #020617 75%); }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .text-gradient { background: linear-gradient(135deg, #60a5fa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-primary { background: linear-gradient(135deg, #06C755, #05a346); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .iphone-frame { width: 300px; height: 610px; background: #000; border-radius: 54px; box-shadow: 0 0 0 10px #1e293b, 0 40px 100px -20px rgba(0,0,0,0.8); position: relative; margin: 0 auto; }
-        .dynamic-island { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; background: #000; border-radius: 20px; z-index: 50; }
-        .iphone-screen { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #fff; position: relative; }
+        
+        /* 手機框架：iPhone 15 Pro 比例 */
+        .iphone-frame {
+            width: 300px;
+            height: 610px;
+            background: #000;
+            border-radius: 54px;
+            box-shadow: 0 0 0 10px #1e293b, 0 0 0 11px #0f172a, 0 40px 100px -20px rgba(0,0,0,0.8);
+            position: relative;
+            margin: 0 auto;
+        }
+        .dynamic-island {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 30px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 50;
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 44px;
+            overflow: hidden;
+            background: #fff;
+            position: relative;
+        }
+
         .fixed-controls { position: fixed; bottom: 24px; right: 20px; z-index: 100; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-        #backToTopBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.4s; }
+        #backToTopBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.4s; opacity: 0; visibility: hidden; }
         #backToTopBtn.show { opacity: 1; visibility: visible; }
+        .smart-tag { padding: 6px 14px; border-radius: 12px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
 
     <div class="fixed-controls">
-        <div id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fa-solid fa-chevron-up"></i></div>
-        <div class="px-4 py-2 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md flex items-center gap-3 shadow-2xl">
-            <span id="liveTime" class="font-mono text-white text-sm font-bold">00:00</span>
+        <div id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <i class="fa-solid fa-chevron-up"></i>
+        </div>
+        <div class="smart-tag shadow-2xl">
+            <div id="liveTime" class="font-mono text-white text-sm font-bold">00:00</div>
             <div class="w-[1px] h-3 bg-white/20"></div>
-            <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono text-blue-400 text-sm font-bold">--°C</span>
+            <div class="flex items-center gap-1.5 text-blue-400 font-bold text-sm">
+                <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono">--°C</span>
+            </div>
         </div>
     </div>
 
     <nav class="fixed w-full z-50 px-4 py-4">
         <div class="max-w-6xl mx-auto glass rounded-3xl px-5 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg"><i class="fa-solid fa-restroom"></i></div>
+                <div class="bg-blue-600 text-white w-9 h-9 flex items-center justify-center rounded-xl shadow-lg">
+                    <i class="fa-solid fa-restroom text-sm"></i>
+                </div>
                 <span class="text-xl font-black tracking-tighter text-white">找廁所<span class="text-blue-500 ml-0.5">MVP</span></span>
             </div>
             <a href="https://line.me/R/ti/p/@439avyvf" class="btn-primary text-white px-6 py-2 rounded-2xl font-bold text-sm shadow-lg">立即加入</a>
@@ -116,12 +154,12 @@
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:bg-white/5 transition-all" data-aos="fade-up">
                 <div class="text-yellow-500 text-3xl mb-4"><i class="fa-solid fa-suitcase-rolling"></i></div>
                 <h4 class="text-xl font-bold mb-3 text-white">旅人與觀光解決方案</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">人生地不熟？透過多國語系切換與直覺導航，兩鍵帶你抵達最近的安心解決方案。</p>
+                <p class="text-gray-400 text-sm leading-relaxed">透過多國語系切換與直覺導航，兩鍵帶你抵達最近的安心解決方案。</p>
             </div>
             <div class="glass p-10 rounded-[2.5rem] border border-white/5 hover:bg-white/5 transition-all" data-aos="fade-up" data-aos-delay="100">
                 <div class="text-green-500 text-3xl mb-4"><i class="fa-solid fa-child-reaching"></i></div>
                 <h4 class="text-xl font-bold mb-3 text-white">親子友善空間</h4>
-                <p class="text-gray-400 text-sm leading-relaxed">快速尋找設有尿布台與親子共用設施的空間，為家長在忙碌行程中提供片刻便利。</p>
+                <p class="text-gray-400 text-sm leading-relaxed">快速尋找設有尿布台與親子共用設施的空間，為家長提供片刻便利。</p>
             </div>
         </div>
     </section>
