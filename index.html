@@ -15,13 +15,8 @@
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #020617; color: #f8fafc; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
         .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e40af 0%, #020617 75%); }
         .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        .glass:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(59, 130, 246, 0.5); transform: translateY(-5px); }
-        .glass:active { transform: scale(0.97); }
-        
         .text-gradient { background: linear-gradient(135deg, #60a5fa, #2dd4bf); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .btn-primary { background: linear-gradient(135deg, #06C755, #05a346); transition: all 0.3s; }
-        .btn-primary:active { transform: scale(0.92); }
 
         /* 公告彈窗 */
         #announcementModal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; padding: 24px; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); }
@@ -32,10 +27,14 @@
         #backToTopBtn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: 0.4s; }
         #backToTopBtn.show { opacity: 1; visibility: visible; }
 
-        /* iPhone 框架 */
-        .iphone-frame { width: 300px; height: 610px; background: #000; border-radius: 54px; box-shadow: 0 0 0 10px #1e293b, 0 40px 100px -20px rgba(0,0,0,0.8); position: relative; margin: 0 auto; }
-        .dynamic-island { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 100px; height: 30px; background: #000; border-radius: 20px; z-index: 50; }
-        .iphone-screen { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: #fff; }
+        /* iPhone 框架與照片補救 */
+        .iphone-frame { width: 280px; height: 580px; background: #000; border-radius: 50px; box-shadow: 0 0 0 10px #1e293b, 0 40px 100px -20px rgba(0,0,0,0.8); position: relative; margin: 0 auto; overflow: hidden; }
+        .dynamic-island { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 80px; height: 25px; background: #000; border-radius: 20px; z-index: 50; }
+        .iphone-screen { width: 100%; height: 100%; background: #111; position: relative; }
+        .iphone-screen img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 影片區塊 */
+        .video-wrapper { position: relative; width: 100%; max-width: 320px; margin: 0 auto; aspect-ratio: 9 / 16; border-radius: 32px; overflow: hidden; border: 1px solid rgba(59, 130, 246, 0.3); }
     </style>
 </head>
 <body>
@@ -43,7 +42,7 @@
     <div id="announcementModal">
         <div class="modal-content glass" data-aos="zoom-in">
             <div class="inline-flex w-16 h-16 items-center justify-center bg-blue-600/20 rounded-full text-blue-400 text-3xl mb-6"><i class="fa-solid fa-bullhorn"></i></div>
-            <h2 id="modalTitle" class="text-2xl font-black text-white mb-4 tracking-tight">載入中...</h2>
+            <h2 id="modalTitle" class="text-2xl font-black text-white mb-4 tracking-tight">公告載入中...</h2>
             <p id="modalBody" class="text-gray-400 text-sm leading-relaxed mb-8 font-bold"></p>
             <button onclick="closeModal()" class="w-full py-4 btn-primary text-white font-black rounded-2xl shadow-lg">我知道了</button>
         </div>
@@ -54,7 +53,7 @@
         <div class="px-4 py-2 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md flex items-center gap-3 shadow-2xl">
             <span id="liveTime" class="font-mono text-white text-sm font-bold tracking-tighter">00:00</span>
             <div class="w-[1px] h-3 bg-white/20"></div>
-            <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono text-blue-400 text-sm font-bold">--°C</span>
+            <span id="weatherEmoji">☀️</span><span id="realTemp" class="font-mono text-blue-400 text-sm font-bold">25°C</span>
         </div>
     </div>
 
@@ -80,23 +79,28 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl mx-auto mb-20 px-4" data-aos="fade-up">
-            <div class="glass p-8 rounded-[2.5rem]">
-                <p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase">全台公廁數據庫</p>
-                <h3 id="toiletCount" class="text-3xl font-black text-blue-400">0</h3>
-            </div>
-            <div class="glass p-8 rounded-[2.5rem]">
-                <p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase">LINE 好友人數</p>
-                <h3 id="friendCount" class="text-3xl font-black text-cyan-400">0</h3>
-            </div>
-            <div class="glass p-8 rounded-[2.5rem]">
-                <p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase">系統響應速度</p>
-                <h3 id="speedCount" class="text-3xl font-black text-purple-400">0</h3>
-            </div>
+            <div class="glass p-8 rounded-[2.5rem]"><p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase text-center">全台公廁數據庫</p><h3 id="toiletCount" class="text-3xl font-black text-blue-400 text-center">0</h3></div>
+            <div class="glass p-8 rounded-[2.5rem]"><p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase text-center">LINE 好友人數</p><h3 id="friendCount" class="text-3xl font-black text-cyan-400 text-center">0</h3></div>
+            <div class="glass p-8 rounded-[2.5rem]"><p class="text-gray-500 text-[10px] font-black mb-3 tracking-widest uppercase text-center">系統響應速度</p><h3 id="speedCount" class="text-3xl font-black text-purple-400 text-center">0</h3></div>
         </div>
 
-        <div class="mb-20 px-4" data-aos="fade-up">
-            <h2 class="text-2xl md:text-5xl font-black text-white tracking-tighter whitespace-nowrap">城市生存，全在掌握之中</h2>
-            <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
+        <div class="mb-12 px-4 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-6xl font-black text-white tracking-tighter whitespace-nowrap">城市生存，全在掌握之中</h2>
+            <div class="w-20 h-1.5 bg-blue-600 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <section class="max-w-6xl mx-auto mb-20 px-4" data-aos="fade-up">
+            <div class="text-center mb-10">
+                <h3 class="text-xl font-bold text-blue-400 mb-2 tracking-tight">實測見證：街頭救火隊</h3>
+                <p class="text-gray-500 text-[10px] font-black uppercase tracking-[0.3em]">Case Study Preview</p>
+            </div>
+            <div class="video-wrapper">
+                <iframe class="w-full h-full" src="https://www.instagram.com/reel/DO3KC2mgfrq/embed" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            </div>
+        </section>
+
+        <div class="max-w-6xl mx-auto px-6 mb-20" data-aos="fade-up">
+             <div class="h-px w-full bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
         </div>
 
         <section class="max-w-6xl mx-auto text-left mb-40 px-4" data-aos="fade-up">
@@ -105,37 +109,39 @@
                     <div class="iphone-frame">
                         <div class="dynamic-island"></div>
                         <div class="iphone-screen">
-                            <img src="https://cdn.discordapp.com/attachments/1261461967185379408/1461914773594837052/IMG_1562.png?ex=696c49bb&is=696af83b&hm=367748f4173d020241c93c9e6bbee35aacf34e6b5e520bc6d9e1be4c5f900a13&" class="w-full h-full object-cover">
+                            <img id="mainImage" 
+                                 src="https://cdn.discordapp.com/attachments/1261461967185379408/1461914773594837052/IMG_1562.png?ex=6974db7b&is=697389fb&hm=ca3c186bc4000b65e6155f60535833b47c91e0ef4cc07235d96308b8a4a05f3a&" 
+                                 onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600&h=1200'; console.log('Discord圖床過期，已自動切換穩定來源');" alt="App Preview">
                         </div>
                     </div>
                 </div>
                 <div class="space-y-6">
                     <div class="glass p-5 rounded-3xl flex gap-6 group">
                         <div class="w-12 h-12 shrink-0 glass rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all"><i class="fa-solid fa-location-crosshairs text-xl"></i></div>
-                        <div><h4 class="text-white text-lg font-bold">精準定位偵測</h4><p class="text-gray-400 text-xs font-bold leading-relaxed">提供 10～15s 高效定位，瞬間鎖定您周邊的最佳選擇。</p></div>
+                        <div><h4 class="text-white text-lg font-bold">精準定位偵測</h4><p class="text-gray-400 text-xs font-bold">提供 10～15s 高效定位，瞬間鎖定您周邊的最佳選擇。</p></div>
                     </div>
                     <div class="glass p-5 rounded-3xl flex gap-6 group">
                         <div class="w-12 h-12 shrink-0 glass rounded-2xl flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all"><i class="fa-solid fa-filter text-xl"></i></div>
-                        <div><h4 class="text-white text-lg font-bold">動態過濾系統</h4><p class="text-gray-400 text-xs font-bold leading-relaxed">可篩選無障礙、親子友善或衛生紙提供，精準過濾點位。</p></div>
+                        <div><h4 class="text-white text-lg font-bold">動態過濾系統</h4><p class="text-gray-400 text-xs font-bold">可篩選無障礙、親子友善或衛生紙提供，精準過濾點位。</p></div>
                     </div>
                     <div class="glass p-5 rounded-3xl flex gap-6 group">
                         <div class="w-12 h-12 shrink-0 glass rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all"><i class="fa-solid fa-language text-xl"></i></div>
-                        <div><h4 class="text-white text-lg font-bold">中英雙語切換</h4><p class="text-gray-400 text-xs font-bold leading-relaxed">支援中英文介面，照顧在地旅客與國際友人的需求。</p></div>
+                        <div><h4 class="text-white text-lg font-bold">中英雙語切換</h4><p class="text-gray-400 text-xs font-bold">支援中英文介面，照顧在地旅客與國際友人的需求。</p></div>
                     </div>
                     <div class="glass p-5 rounded-3xl flex gap-6 group">
                         <div class="w-12 h-12 shrink-0 glass rounded-2xl flex items-center justify-center text-green-400 group-hover:bg-green-500 group-hover:text-white transition-all"><i class="fa-solid fa-comment-dots text-xl"></i></div>
-                        <div><h4 class="text-white text-lg font-bold">社群即時回報</h4><p class="text-gray-400 text-xs font-bold leading-relaxed">用戶共同維護的評價體系，掌握最真實的環境潔淨度。</p></div>
+                        <div><h4 class="text-white text-lg font-bold">社群即時回報</h4><p class="text-gray-400 text-xs font-bold">用戶共同維護的評價體系，掌握最真實的環境潔淨度。</p></div>
                     </div>
                     <div class="glass p-5 rounded-3xl flex gap-6 group">
                         <div class="w-12 h-12 shrink-0 glass rounded-2xl flex items-center justify-center text-pink-400 group-hover:bg-pink-500 group-hover:text-white transition-all"><i class="fa-solid fa-route text-xl"></i></div>
-                        <div><h4 class="text-white text-lg font-bold">一鍵導航路徑</h4><p class="text-gray-400 text-xs font-bold leading-relaxed">無縫串接主流地圖，選定點位後立即開啟最佳路徑。</p></div>
+                        <div><h4 class="text-white text-lg font-bold">一鍵導航路徑</h4><p class="text-gray-400 text-xs font-bold">無縫串接主流地圖，選定點位後立即開啟最佳路徑。</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <div class="mb-16 px-6" data-aos="fade-up">
-            <h2 class="text-2xl md:text-5xl font-black text-white tracking-tighter">為每一種需求<br class="md:hidden">準備專屬方案</h2>
+            <h2 class="text-2xl md:text-5xl font-black text-white tracking-tighter whitespace-nowrap">為每一種需求準備專屬方案</h2>
             <div class="w-16 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
         </div>
     </header>
@@ -144,22 +150,22 @@
         <div class="glass p-10 rounded-[2.5rem]" data-aos="fade-up">
             <div class="text-blue-500 text-2xl mb-4"><i class="fa-solid fa-motorcycle"></i></div>
             <h4 class="text-xl font-black mb-3 text-white tracking-tight">外送與運將的後盾</h4>
-            <p class="text-gray-500 leading-relaxed">精準過濾具備便利停車與 24 小時開放的點位。</p>
+            <p class="text-gray-500 leading-relaxed">精準過濾具備便利停車與 24 小時開放的點位，讓您的工作節奏不再被打斷。</p>
         </div>
         <div class="glass p-10 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="100">
             <div class="text-pink-500 text-2xl mb-4"><i class="fa-solid fa-wheelchair"></i></div>
             <h4 class="text-xl font-black mb-3 text-white tracking-tight">守護身障與高齡友善</h4>
-            <p class="text-gray-500 leading-relaxed">專屬過濾具備無障礙空間，讓尊嚴感伴隨需求。</p>
+            <p class="text-gray-500 leading-relaxed">專屬過濾具備無障礙空間與扶手設施，讓每一次出門都充滿尊嚴與安心。</p>
         </div>
         <div class="glass p-10 rounded-[2.5rem]" data-aos="fade-up">
             <div class="text-yellow-500 text-2xl mb-4"><i class="fa-solid fa-suitcase-rolling"></i></div>
             <h4 class="text-xl font-black mb-3 text-white tracking-tight">旅人與觀光的方案</h4>
-            <p class="text-gray-500 leading-relaxed">提供中英雙語介面，讓旅途不再因為急迫而卡關。</p>
+            <p class="text-gray-500 leading-relaxed">提供中英雙語介面與評價，讓國際旅客在台灣的旅途不再因為急迫而卡關。</p>
         </div>
         <div class="glass p-10 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="100">
             <div class="text-green-500 text-2xl mb-4"><i class="fa-solid fa-child-reaching"></i></div>
             <h4 class="text-xl font-black mb-3 text-white tracking-tight">營造安心的親子空間</h4>
-            <p class="text-gray-500 leading-relaxed">快速尋找設有尿布台與親子設施的潔淨空間。</p>
+            <p class="text-gray-500 leading-relaxed">快速尋找設有尿布台、親子友善設施且環境潔淨的空間，輕鬆解決家長難題。</p>
         </div>
     </section>
 
@@ -172,83 +178,76 @@
         </div>
     </section>
 
-    <footer class="pt-16 pb-12 px-6 border-t border-white/5 bg-slate-950/50">
+    <footer class="pb-12 px-6 border-t border-white/5 pt-10 text-center">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-left">
-                <div class="flex items-center space-x-2.5 mb-2">
-                    <div class="bg-blue-600 text-white w-5 h-5 flex items-center justify-center rounded shadow-lg"><i class="fa-solid fa-restroom text-[8px]"></i></div>
-                    <span class="text-lg font-black tracking-tighter text-white">找廁所<span class="text-blue-500">MVP</span></span>
-                </div>
-                <p class="text-gray-600 text-[10px] font-bold uppercase tracking-wide">致力於解決人類最迫切的基本需求</p>
-            </div>
-            <div class="flex flex-col items-center md:items-end gap-3">
-                <div class="flex space-x-5">
-                    <a href="https://www.instagram.com/toiletmvp" target="_blank" class="text-gray-500 hover:text-pink-500 transition-all text-xl"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://line.me/R/ti/p/@439avyvf" class="text-gray-500 hover:text-green-500 transition-all text-xl"><i class="fa-brands fa-line"></i></a>
-                </div>
-                <p class="text-[9px] text-gray-700 tracking-[0.2em] font-black">© 2026 TOILET MVP. ALL RIGHTS RESERVED.</p>
-            </div>
+            <div><span class="text-lg font-black text-white">找廁所<span class="text-blue-500">MVP</span></span></div>
+            <p class="text-[9px] text-gray-700 tracking-[0.2em] font-black uppercase">© 2026 TOILET MVP. ALL RIGHTS RESERVED.</p>
         </div>
     </footer>
 
     <script>
         AOS.init({ duration: 800, once: true });
-        const SPREADSHEET_ID = '1-HmLicJ0fXpitz_Z72X3QYxIVq6gh5i_1foNb5u0niI';
-        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
 
-        async function fetchAnnouncement() {
-            try {
-                const response = await fetch(CSV_URL);
-                const text = await response.text();
-                const rows = text.split('\n').map(row => row.split(',').map(cell => cell.replace(/"/g, '').trim()));
-                if (rows.length >= 1) {
-                    document.getElementById('modalTitle').innerText = rows[0][0]; 
-                    document.getElementById('modalBody').innerText = rows[1][0];  
-                    document.getElementById('announcementModal').style.display = 'flex';
-                }
-            } catch (e) { console.log("載入中..."); }
+        // 氣溫 (API + 3度 體感修正)
+        async function getTemp() {
+            const tempElement = document.getElementById('realTemp');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`);
+                        const data = await res.json();
+                        const displayTemp = Math.round(data.current_weather.temperature) + 3;
+                        tempElement.innerText = displayTemp + "°C";
+                    } catch (e) { tempElement.innerText = "25°C"; }
+                }, () => { tempElement.innerText = "25°C"; });
+            }
         }
-        function closeModal() { document.getElementById('announcementModal').style.display = 'none'; }
+
+        // 時間與跑馬燈計數
         function updateTime() {
             const now = new Date();
             document.getElementById('liveTime').innerText = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0');
         }
         setInterval(updateTime, 1000); updateTime();
-        async function getTemp() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(async (pos) => {
-                    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current_weather=true`);
-                    const data = await res.json();
-                    document.getElementById('realTemp').innerText = `${Math.round(data.current_weather.temperature)}°C`;
-                }, () => { document.getElementById('realTemp').innerText = "24°C"; });
-            }
+
+        // 公告 (我知道了)
+        async function fetchAnnouncement() {
+            const SPREADSHEET_ID = '1-HmLicJ0fXpitz_Z72X3QYxIVq6gh5i_1foNb5u0niI';
+            const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
+            try {
+                const res = await fetch(CSV_URL);
+                const text = await res.text();
+                const rows = text.split('\n').map(r => r.split(',').map(c => c.replace(/"/g, '').trim()));
+                document.getElementById('modalTitle').innerText = rows[0][0]; 
+                document.getElementById('modalBody').innerText = rows[1][0];  
+                document.getElementById('announcementModal').style.display = 'flex';
+            } catch (e) { console.log("載入中..."); }
         }
-        window.onscroll = () => {
-            const btn = document.getElementById("backToTopBtn");
-            if (window.scrollY > 400) btn.classList.add("show");
-            else btn.classList.remove("show");
-        };
+
+        function closeModal() { document.getElementById('announcementModal').style.display = 'none'; }
+
         function countUp(id, target, suffix = "", isSpeed = false) {
             const element = document.getElementById(id);
             let current = 0;
             const timer = setInterval(() => {
-                current += Math.ceil(target / 40);
+                current += Math.ceil(target / 50);
                 if (current >= target) {
                     element.innerText = isSpeed ? "10～15s" : target.toLocaleString() + suffix;
                     clearInterval(timer);
                 } else {
                     element.innerText = isSpeed ? Math.floor((current/target)*15) + "s" : current.toLocaleString() + suffix;
                 }
-            }, 25);
+            }, 30);
         }
-        document.addEventListener('DOMContentLoaded', () => {
+
+        window.onload = () => {
             fetchAnnouncement(); getTemp();
             setTimeout(() => {
                 countUp("toiletCount", 50000, " +");
                 countUp("friendCount", 30000, " +");
                 countUp("speedCount", 15, "", true);
-            }, 400);
-        });
+            }, 500);
+        };
     </script>
 </body>
 </html>
