@@ -79,6 +79,20 @@
             0% { opacity: 0.1; transform: scale(0.8); }
             100% { opacity: 1; transform: scale(1.2); }
         }
+
+        /* 無限滾動動畫區塊 */
+        @keyframes infinite-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-50% - 12px)); }
+        }
+        .animate-infinite-scroll {
+            animation: infinite-scroll 40s linear infinite;
+            display: flex;
+            width: max-content;
+        }
+        .font-mono {
+            font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', monospace;
+        }
     </style>
 </head>
 <body>
@@ -183,6 +197,41 @@
                     <i class="fa-solid fa-database text-sky-400 mb-6 text-2xl"></i>
                     <h4 class="text-white font-bold text-lg mb-2">多重數據驗證</h4>
                     <div class="detail-wrapper"><div class="detail-content text-slate-400 text-sm leading-relaxed">整合 OpenStreetMap、政府資料開放平臺與使用者即時回饋，透過三方交叉驗證確保資訊準確。</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 overflow-hidden mb-40" data-aos="fade-up">
+            <div class="text-center mb-12">
+                <p class="text-[10px] font-black tracking-[0.5em] text-sky-500 mb-4 uppercase">Project Status</p>
+                <h2 class="text-3xl md:text-5xl font-black text-white tracking-tighter">專題實作紀錄</h2>
+            </div>
+            <div class="flex mt-10 relative">
+                <div class="flex animate-infinite-scroll gap-6 hover:[animation-play-state:paused]">
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left">
+                        <div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></div><span class="text-[10px] font-mono text-sky-500 font-bold">LINE BOT LOGIC</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「成功介接 LINE Messaging API，開發者能透過對話框即時回應使用者位置，並傳送對應的地圖導航連結。」</p>
+                        <div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Interaction</div>
+                    </div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-sky-500/20 bg-sky-500/5 text-left">
+                        <div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div><span class="text-[10px] font-mono text-green-500 font-bold">DATA CLEANING</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「整理政府公廁開放資料與使用者回報點位，透過經緯度校準與分類標籤，確保救援資訊的基礎準確性。」</p>
+                        <div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Dataset</div>
+                    </div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left">
+                        <div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div><span class="text-[10px] font-mono text-purple-500 font-bold">USER FLOW</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「設計極簡的對話式搜尋流程，大幅減少從感到焦慮到獲取地圖路徑的操作步驟，專注於解決緊急問題。」</p>
+                        <div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #UX_Logic</div>
+                    </div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left">
+                        <div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div><span class="text-[10px] font-mono text-orange-500 font-bold">CORE VALUE</span></div>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「本專題旨在運用資訊技術建立城市應急安全網，將零散的公共數據轉化為真正能幫助他人的數位工具。」</p>
+                        <div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Social_Impact</div>
+                    </div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left"><div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></div><span class="text-[10px] font-mono text-sky-500 font-bold">LINE BOT LOGIC</span></div><p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「成功介接 LINE Messaging API，開發者能透過對話框即時回應使用者位置，並傳送對應的地圖導航連結。」</p><div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Interaction</div></div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-sky-500/20 bg-sky-500/5 text-left"><div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div><span class="text-[10px] font-mono text-green-500 font-bold">DATA CLEANING</span></div><p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「整理政府公廁開放資料與使用者回報點位，透過經緯度校準與分類標籤，確保救援資訊的基礎準確性。」</p><div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Dataset</div></div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left"><div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div><span class="text-[10px] font-mono text-purple-500 font-bold">USER FLOW</span></div><p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「設計極簡的對話式搜尋流程，大幅減少從感到焦慮到獲取地圖路徑的操作步驟，專注於解決緊急問題。」</p><div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #UX_Logic</div></div>
+                    <div class="glass p-6 rounded-3xl w-[320px] shrink-0 border-white/5 text-left"><div class="flex items-center gap-2 mb-4"><div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div><span class="text-[10px] font-mono text-orange-500 font-bold">CORE VALUE</span></div><p class="text-slate-400 text-sm leading-relaxed mb-6 font-bold">「本專題旨在運用資訊技術建立城市應急安全網，將零散的公共數據轉化為真正能幫助他人的數位工具。」</p><div class="text-[10px] font-black text-slate-600 border-t border-white/5 pt-4 uppercase tracking-tighter">Focus: #Social_Impact</div></div>
                 </div>
             </div>
         </section>
