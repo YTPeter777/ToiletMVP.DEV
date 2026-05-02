@@ -424,9 +424,11 @@
         }
         fetchWeather();
 
+        const DB_URL = 'https://mvpp-8d9cd-default-rtdb.firebaseio.com';
+
         async function syncAnnouncement() {
             try {
-                const res = await fetch('https://mvpp-8d9cd-default-rtdb.firebaseio.com/announcement.json');
+                const res = await fetch(DB_URL + '/announcement.json');
                 const data = await res.json();
                 if (data) {
                     if (data.title) document.getElementById('modalTitle').innerText = data.title;
@@ -434,7 +436,37 @@
                 }
             } catch (e) { }
         }
+
+        async function loadThemeFromFirebase() {
+            try {
+                const res = await fetch(DB_URL + '/theme.json');
+                const theme = await res.json();
+                if (theme && theme.primaryColor) {
+                    document.documentElement.style.setProperty('--primary-color', theme.primaryColor);
+                    document.documentElement.style.setProperty('--gradient-angle', theme.gradientAngle || '135deg');
+                    document.documentElement.style.setProperty('--gradient-start', theme.gradientStart || '#020617');
+                    document.documentElement.style.setProperty('--gradient-end', theme.gradientEnd || '#1e3a8a');
+                }
+            } catch (e) { }
+        }
+
+        async function loadContentFromFirebase() {
+            try {
+                const res = await fetch(DB_URL + '/content.json');
+                const content = await res.json();
+                if (content) {
+                    if (content.heroTitle) {
+                        const heroEl = document.querySelector('h1');
+                        if (heroEl) heroEl.innerHTML = content.heroTitle.replace(/\n/g, '<br>');
+                    }
+                }
+            } catch (e) { }
+        }
+
         syncAnnouncement();
+        loadThemeFromFirebase();
+        loadContentFromFirebase();
+        setInterval(syncAnnouncement, 5000);
 
         /* ── 輪播邏輯 ── */
         (function() {
